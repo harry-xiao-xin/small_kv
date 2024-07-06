@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.24)
+project(small_kv)
+set(CMAKE_CXX_STANDARD 17)
+find_package(glog REQUIRED)
+include_directories(./include)
+set(link_lib glog pthread gtest)
+aux_source_directory(./include/cache LIB_CACHE)
+
+add_executable(small_kv main.cpp ${LIB_CACHE})
+target_include_directories(${PROJECT_NAME} PUBLIC ${GTEST_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${link_lib})
+enable_testing()
+add_subdirectory(test)
